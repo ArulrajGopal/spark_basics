@@ -6,7 +6,7 @@ data = [
     ("Alice", 30, "Chicago")
 ]
 
-Columns = ["Name", "Age","City" ]
+columns = ["Name", "Age","City" ]
 
 
 df = spark.createDataFrame(data, columns)
