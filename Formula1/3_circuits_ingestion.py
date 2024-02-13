@@ -26,11 +26,25 @@ final_df = data_type_convert(circuits_df, circuits_schema)\
 
 # COMMAND ----------
 
-final_df.display()
+final_df.printSchema()
 
 # COMMAND ----------
 
 final_df.write\
     .format('parquet')\
     .mode('overwrite')\
-    .saveAsTable('formulaone.stage.circuits')
+    .save('/mnt/stage/circuits')
+
+# COMMAND ----------
+
+final_df.display()
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC select * from stage.circuits
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC desc extended stage.circuits

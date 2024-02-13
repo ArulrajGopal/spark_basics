@@ -51,7 +51,3 @@ dbutils.fs.mount(
 # COMMAND ----------
 
 display(dbutils.fs.mounts())
-
-# COMMAND ----------
-
-
