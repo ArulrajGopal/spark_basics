@@ -1,9 +1,13 @@
 # Databricks notebook source
-def read_file(file_name, format, container_name):
+from pyspark.sql.functions import current_timestamp
+
+# COMMAND ----------
+
+def read_file(file_name, format):
     df = spark.read\
     .format(f"{format}")\
     .option('Header',True)\
-    .load(f'abfss://{container_name}@adls9867external.dfs.core.windows.net/{file_name}')
+    .load(f'/mnt/raw/{file_name}')
     return df
 
 # COMMAND ----------
@@ -14,7 +18,3 @@ def data_type_convert(df, schema):
         lst.append(f"cast({column} as {type}) {column}")
     changed_df = df.selectExpr(lst)
     return changed_df
-
-# COMMAND ----------
-
-

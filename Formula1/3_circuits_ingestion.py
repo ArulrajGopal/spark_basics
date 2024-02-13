@@ -1,9 +1,10 @@
 # Databricks notebook source
-# MAGIC %run ./1_Functions
+# MAGIC %run ./1_common
 
 # COMMAND ----------
 
-circuits_df = read_file('circuits.csv', 'csv', 'raw')
+circuits_df = read_file('circuits.csv', 'csv')\
+    .drop('url')
 
 # COMMAND ----------
 
@@ -15,22 +16,21 @@ circuits_schema = {
  'country':'STRING',
  'lat':'Double',
  'lng':'Double',
- 'alt':'int',
- 'url':'STRING'
+ 'alt':'int'
 }
 
 # COMMAND ----------
 
-final_df = data_type_convert(circuits_df, circuits_schema)
+final_df = data_type_convert(circuits_df, circuits_schema)\
+    .withColumn("loaded_time", current_timestamp())
+
+# COMMAND ----------
+
+final_df.display()
 
 # COMMAND ----------
 
 final_df.write\
-    .format('delta')\
+    .format('parquet')\
     .mode('overwrite')\
-    .option("path","abfss://stage@adls9867external.dfs.core.windows.net/circuits")\
     .saveAsTable('formulaone.stage.circuits')
-
-# COMMAND ----------
-
-
