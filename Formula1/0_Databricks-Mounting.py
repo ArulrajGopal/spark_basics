@@ -10,7 +10,7 @@ display(dbutils.fs.mounts())
 # COMMAND ----------
 
 storage_account_name = "sparkdemosa"  
-accountkey= "P5VzG8lPqENEfT8bfiiqNak6ByedW3zSSd+Gq4YLpw/5r2kc+3CiMtG9kegSdODfUeu5U1WjMnhw+AStqQ+A4w=="  
+accountkey= ""  
 container_name = "raw"
 fullname = "fs.azure.account.key." +storage_account_name+ ".blob.core.windows.net"
 
