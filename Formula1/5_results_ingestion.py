@@ -1,9 +1,9 @@
 # Databricks notebook source
-# MAGIC %run ./1_Functions
+# MAGIC %run ./1_common
 
 # COMMAND ----------
 
-results_df = read_file('results.json', 'json', 'raw')
+results_df = read_file('results.json', 'json')
 
 # COMMAND ----------
 
@@ -33,10 +33,15 @@ final_df = data_type_convert(results_df, results_schema)
 # COMMAND ----------
 
 final_df.write\
-    .format('delta')\
+    .format('csv')\
     .mode('overwrite')\
-    .option("path","abfss://stage@adls9867external.dfs.core.windows.net/results")\
-    .saveAsTable('formulaone.stage.results')
+    .option("path","/mnt/stage/results")\
+    .saveAsTable('stage.results')
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC select * from stage.results
 
 # COMMAND ----------
 

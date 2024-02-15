@@ -42,4 +42,28 @@ location '/mnt/stage/races'
 
 -- COMMAND ----------
 
+DROP TABLE IF EXISTS stage.results;
 
+CREATE TABLE stage.results(
+  ConstructorId INT,
+  driverId INT,
+  fastestLap Int,
+  fastestLapSpeed DECIMAL,
+  fastestLaptime DECIMAL,
+  grid INT,
+  laps INT,
+  milliseconds INT,
+  number int,
+  points int,
+  position int,
+  positionorder int,
+  positiontest int,
+  raceId int,
+  rank int,
+  resultId int,
+  statusId int,
+  time string,
+  loaded_time timestamp
+)
+using csv
+location '/mnt/stage/results'
