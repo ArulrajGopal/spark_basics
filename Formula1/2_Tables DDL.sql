@@ -7,8 +7,10 @@ CREATE DATABASE IF NOT EXISTS curated
 
 -- COMMAND ----------
 
-CREATE TABLE IF NOT EXISTS stage.circuits(
-  circuit_id Integer,
+DROP TABLE IF EXISTS stage.circuits;
+
+CREATE TABLE stage.circuits(
+  circuit_id INT,
   circuitref STRING,
   name STRING,
   location STRING,
@@ -18,7 +20,9 @@ CREATE TABLE IF NOT EXISTS stage.circuits(
   alt int,
   loaded_time timestamp
 )
-using parquet
-options (
-  'path' '/mnt/stage/circuits'
-)
+using csv
+location '/mnt/stage/circuits'
+
+-- COMMAND ----------
+
+

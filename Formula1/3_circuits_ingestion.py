@@ -30,18 +30,11 @@ final_df.printSchema()
 
 # COMMAND ----------
 
-final_df.display()
-
-# COMMAND ----------
-
-final_df.display()
-
-# COMMAND ----------
-
 final_df.write\
-    .format('parquet')\
+    .format('csv')\
     .mode('overwrite')\
-    .save('/mnt/stage/circuits')
+    .option('path','/mnt/stage/circuits')\
+    .saveAsTable('stage.circuits')
 
 # COMMAND ----------
 
@@ -52,3 +45,7 @@ final_df.write\
 
 # MAGIC %sql
 # MAGIC desc extended stage.circuits
+
+# COMMAND ----------
+
+
