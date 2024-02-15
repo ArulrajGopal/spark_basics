@@ -25,4 +25,21 @@ location '/mnt/stage/circuits'
 
 -- COMMAND ----------
 
+DROP TABLE IF EXISTS stage.races;
+
+CREATE TABLE stage.races(
+  raceId INT,
+  year INT,
+  round INT,
+  circuitId INT,
+  name STRING,
+  date date,
+  time string,
+  loaded_time timestamp
+)
+using csv
+location '/mnt/stage/races'
+
+-- COMMAND ----------
+
 

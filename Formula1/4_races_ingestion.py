@@ -1,9 +1,9 @@
 # Databricks notebook source
-# MAGIC %run ./1_Functions
+# MAGIC %run ./1_common
 
 # COMMAND ----------
 
-races_df = read_file('races.csv', 'csv', 'raw')
+races_df = read_file('races.csv', 'csv')
 
 # COMMAND ----------
 
@@ -20,12 +20,23 @@ races_schema = {
 
 # COMMAND ----------
 
-final_df = data_type_convert(races_df, races_schema)
+final_df = data_type_convert(races_df, races_schema)\
+    .withColumn("loaded_time", current_timestamp())\
+    .drop("url")
 
 # COMMAND ----------
 
 final_df.write\
-    .format('delta')\
+    .format('csv')\
     .mode('overwrite')\
-    .option("path","abfss://stage@adls9867external.dfs.core.windows.net/races")\
-    .saveAsTable('formulaone.stage.races')
+    .option("path","/mnt/stage/races")\
+    .saveAsTable('stage.races')
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC desc extended stage.races
+
+# COMMAND ----------
+
+
