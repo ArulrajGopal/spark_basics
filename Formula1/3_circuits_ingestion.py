@@ -30,10 +30,7 @@ final_df.printSchema()
 
 # COMMAND ----------
 
-final_df.write\
-    .format('parquet')\
-    .mode('overwrite')\
-    .save('/mnt/stage/circuits')
+final_df.display()
 
 # COMMAND ----------
 
@@ -41,8 +38,15 @@ final_df.display()
 
 # COMMAND ----------
 
+final_df.write\
+    .format('parquet')\
+    .mode('overwrite')\
+    .save('/mnt/stage/circuits')
+
+# COMMAND ----------
+
 # MAGIC %sql
-# MAGIC select * from stage.circuits
+# MAGIC select * from  stage.circuits
 
 # COMMAND ----------
 

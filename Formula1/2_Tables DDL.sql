@@ -22,7 +22,3 @@ using parquet
 options (
   'path' '/mnt/stage/circuits'
 )
-
--- COMMAND ----------
-
-
