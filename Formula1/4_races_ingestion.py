@@ -35,6 +35,11 @@ final_df.write\
 # COMMAND ----------
 
 # MAGIC %sql
+# MAGIC select * from stage.races
+
+# COMMAND ----------
+
+# MAGIC %sql
 # MAGIC desc extended stage.races
 
 # COMMAND ----------
