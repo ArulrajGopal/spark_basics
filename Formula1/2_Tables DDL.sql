@@ -67,3 +67,23 @@ CREATE TABLE stage.results(
 )
 using csv
 location '/mnt/stage/results'
+
+-- COMMAND ----------
+
+DROP TABLE IF EXISTS stage.drivers;
+
+CREATE TABLE stage.drivers(
+  driverId INT,
+  driverRef STRING,
+  number INT,
+  code STRING,
+  name STRING,
+  dob DATE,
+  nationality STRING
+)
+using csv
+location '/mnt/stage/drivers'
+
+-- COMMAND ----------
+
+

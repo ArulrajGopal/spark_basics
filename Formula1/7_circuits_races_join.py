@@ -22,6 +22,10 @@ final_df = races_df\
 
 # COMMAND ----------
 
+
+
+# COMMAND ----------
+
 final_df.write\
     .format('delta')\
     .mode('overwrite')\

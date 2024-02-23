@@ -25,28 +25,32 @@ drivers_schema = StructType(fields=[StructField("driverId", IntegerType(), False
 
 # COMMAND ----------
 
-container_name = 'raw'
-file_name = 'drivers.json'
-
 drivers_df = spark.read \
-.schema(drivers_schema) \
-.json(f"abfss://{container_name}@adls9867external.dfs.core.windows.net/{file_name}")
+    .format("json")\
+    .schema(drivers_schema)\
+    .load(f'/mnt/raw/drivers.json')
 
 # COMMAND ----------
 
-final_df = drivers_df.withColumn("name", concat(col("name.forename"), lit(" "), col("name.surname")))
+drivers_df.display()
+
+# COMMAND ----------
+
+final_df = drivers_df.withColumn("name", concat(col("name.forename"), lit(" "), col("name.surname")))\
+    .drop("url")
 
 # COMMAND ----------
 
 final_df.write\
-    .format('delta')\
+    .format('csv')\
     .mode('overwrite')\
-    .option("path","abfss://stage@adls9867external.dfs.core.windows.net/drivers")\
-    .saveAsTable('formulaone.stage.drivers')
+    .option("path","/mnt/stage/drivers")\
+    .saveAsTable('stage.drivers')
 
 # COMMAND ----------
 
-
+# MAGIC %sql
+# MAGIC select * from stage.drivers
 
 # COMMAND ----------
 
