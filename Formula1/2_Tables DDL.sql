@@ -86,4 +86,29 @@ location '/mnt/stage/drivers'
 
 -- COMMAND ----------
 
+DROP TABLE IF EXISTS curated.races_circuits;
+
+CREATE TABLE curated.races_circuits(
+  raceId INT,
+  year INT,
+  circuit_name STRING,
+  location STRING
+)
+using csv
+location '/mnt/curated/races_circuits'
+
+-- COMMAND ----------
+
+DROP TABLE IF EXISTS curated.results_drivers;
+
+CREATE TABLE curated.results_drivers(
+  raceId INT,
+  points INT,
+  driver_name STRING
+)
+using csv
+location '/mnt/curated/results_drivers'
+
+-- COMMAND ----------
+
 
