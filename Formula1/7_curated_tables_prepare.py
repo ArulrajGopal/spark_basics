@@ -12,7 +12,7 @@ results_df = spark.read.table('stage.results')
 
 races_circuits_joined_df = races_df.alias("LH") .join(circuits_df.alias("RH"),
                 col("LH.circuitId") == col("RH.circuitId"),'left')\
-                .select(col("LH.raceId"),col("year"),col("RH.name").alias("circuit_name"),col("RH.location"))
+                .select(col("LH.raceId"),col("LH.year"),col("RH.name").alias("circuit_name"),col("RH.location"))
 
 # COMMAND ----------
 
@@ -23,6 +23,10 @@ races_circuits_joined_df.display()
 results_drivers_joined_df = results_df.alias("LH") .join(drivers_df.alias("RH"),
                 col("LH.driverId") == col("RH.driverId"),'left')\
                 .select(col("LH.raceId"),col("LH.points"),col("RH.name").alias("driver_name"))
+
+# COMMAND ----------
+
+results_drivers_joined_df.display()
 
 # COMMAND ----------
 
@@ -49,6 +53,10 @@ results_drivers_joined_df.write\
 
 # MAGIC %sql
 # MAGIC select * from curated.results_drivers
+
+# COMMAND ----------
+
+dbutils.fs.rm('/mnt/stage/drivers',True)
 
 # COMMAND ----------
 
