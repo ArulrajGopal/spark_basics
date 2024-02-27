@@ -56,8 +56,4 @@ results_drivers_joined_df.write\
 
 # COMMAND ----------
 
-dbutils.fs.rm('/mnt/stage/drivers',True)
-
-# COMMAND ----------
-
 
